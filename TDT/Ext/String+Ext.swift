@@ -11,9 +11,13 @@ extension String {
     
     func convertToDateFormat() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
-        let dateStyle = dateFormatter.dateStyle
-        
-        return dateFormatter.date(from: self)!
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT:0)
+        if let output = dateFormatter.date(from: self) {
+            print(output)
+            return output
+        } else {
+            return Date()
+        }
     }
 }

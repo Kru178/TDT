@@ -21,6 +21,7 @@ class CollectionViewController: UICollectionViewController {
     
     var list: [Results] = []
     var list2019: [Results] = []
+    var page = 1
     
     let formatter = DateFormatter()
     
@@ -28,56 +29,53 @@ class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.collectionView.alwaysBounceVertical = true
         
         title = "Top 2019 Movies"
+      
+        updateUI(for: page)
         
-        for i in 1...10 {
-        NetworkManager.shared.getMovies(for: i) { [weak self] (result) in
+    }
+    
+    func updateUI(for page: Int) {
+        
+        NetworkManager.shared.getMovies(for: page) { [weak self] (result) in
             guard let self = self else {return}
             
             switch result {
             
             case .success(let movies):
                 self.list = movies.results
-                print("list = \(self.list)")
+                //                print("list = \(self.list)")
                 for movie in self.list {
                     let date = movie.releaseDate?.convertToDateFormat()
-                    print("date: \(date!)")
+                                        print("date: \(date!)")
                     let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
-                    print(components)
+                    //                    print(components)
                     if components.year == 2019 {
+                        
                         self.list2019.append(movie)
+                        
                     }
                 }
-                
                 DispatchQueue.main.async {
-                    print("I'm here")
-                    self.updateUI() }
+                    print("loading")
+                    self.collectionView.reloadData()
+                    for movie in self.list2019 {
+                        print("movie: \(movie.title), release date: \(movie.releaseDate!)")
+                    }
+                }
                 
             case .failure(let error):
                 print("nil")
                 print(error.localizedDescription)
             }
         }
-        }
+        
+        
+        
         
     }
-    
-    func updateUI() {
-        
-        collectionView.reloadData()
-    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     // MARK: UICollectionViewDataSource
     
@@ -99,16 +97,20 @@ class CollectionViewController: UICollectionViewController {
         cell.layer.shadowRadius = 2
         cell.layer.shadowOpacity = 0.5
         cell.layer.masksToBounds = false
-
+        
+        cell.draw(cell.contentView.frame)
+        
+        
         
         if list2019.isEmpty {
             cell.titleLabel.text = "title"
         } else {
             cell.titleLabel.text = list2019[indexPath.item].title
-//            cell.ratingLabel.text = "Rating: \(list2019[indexPath.item].voteAverage)"
-//            cell.ratingProgressBar.progress = Float(list2019[indexPath.item].voteAverage / 10)
+            //            cell.ratingLabel.text = "Rating: \(list2019[indexPath.item].voteAverage)"
+            //            cell.ratingProgressBar.progress = Float(list2019[indexPath.item].voteAverage / 10)
             cell.descriptionLabel.text = list2019[indexPath.item].overview
-            cell.releaseDateLabel.text = list2019[indexPath.item].releaseDate?.convertToDateFormat().convertToStringFormat()
+            cell.releaseDateLabel.text = list2019[indexPath.item].releaseDate!.convertToDateFormat().convertToStringFormat()
+//                .convertToDateFormat().convertToStringFormat()
             cell.downloadImage(fromURL: list2019[indexPath.item].posterPath)
         }
         return cell
@@ -116,34 +118,17 @@ class CollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDelegate
     
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            page += 1
+            
+            updateUI(for: page)
+        }
+    }
     
 }
 

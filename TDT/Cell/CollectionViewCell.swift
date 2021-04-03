@@ -23,4 +23,23 @@ class CollectionViewCell: UICollectionViewCell {
             DispatchQueue.main.async { self.imageView.image = image }
         }
     }
+    
+    override func draw(_ rect: CGRect) {
+        
+        let aPath = UIBezierPath()
+        
+        let startPoint = CGPoint(x: imageView.frame.size.width, y: self.frame.height - 30)
+        let endPoint = CGPoint(x: self.frame.width, y: self.frame.height - 30)
+
+        aPath.move(to: startPoint)
+        aPath.addLine(to: endPoint)
+
+        UIColor.lightGray.set()
+        aPath.lineWidth = 1.0
+        aPath.stroke()
+    }
+    
+    func configure() {
+    }
+    
 }
