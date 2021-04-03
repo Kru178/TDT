@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78481A4826189DCC00A07F42 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78481A4726189DCC00A07F42 /* ProgressView.swift */; };
 		7885FCAE261382E400247432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAD261382E400247432 /* AppDelegate.swift */; };
 		7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAF261382E400247432 /* SceneDelegate.swift */; };
 		7885FCB5261382E400247432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7885FCB3261382E400247432 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78481A4726189DCC00A07F42 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		7885FCAA261382E400247432 /* TDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885FCAD261382E400247432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7885FCAF261382E400247432 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		787EBF592618C70C00D5B56F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCD026139F7A00247432 /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		787EBF5A2618C72900D5B56F /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCC42613835E00247432 /* CollectionViewController.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		787EBF5C2618C73900D5B56F /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				78481A4726189DCC00A07F42 /* ProgressView.swift */,
+				7885FCE026184C8E00247432 /* Cell */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		787EBF5E2618C75100D5B56F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCD326139FF800247432 /* TDError.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		7885FCA1261382E400247432 = {
 			isa = PBXGroup;
 			children = (
@@ -68,12 +103,12 @@
 		7885FCAC261382E400247432 /* TDT */ = {
 			isa = PBXGroup;
 			children = (
-				7885FCD026139F7A00247432 /* NetworkManager.swift */,
-				7885FCD326139FF800247432 /* TDError.swift */,
+				787EBF592618C70C00D5B56F /* Manager */,
+				787EBF5E2618C75100D5B56F /* Utility */,
 				7885FCCA261384BC00247432 /* Model */,
-				7885FCC42613835E00247432 /* CollectionViewController.swift */,
+				787EBF5A2618C72900D5B56F /* Screen */,
+				787EBF5C2618C73900D5B56F /* CustomView */,
 				7885FCDC26184C2300247432 /* Ext */,
-				7885FCE026184C8E00247432 /* Cell */,
 				7885FCDE26184C6F00247432 /* Support */,
 			);
 			path = TDT;
@@ -194,6 +229,7 @@
 				7885FCAE261382E400247432 /* AppDelegate.swift in Sources */,
 				7885FCC82613844F00247432 /* Movie.swift in Sources */,
 				7885FCD426139FF800247432 /* TDError.swift in Sources */,
+				78481A4826189DCC00A07F42 /* ProgressView.swift in Sources */,
 				7885FCD7261846B300247432 /* String+Ext.swift in Sources */,
 				7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */,
 			);

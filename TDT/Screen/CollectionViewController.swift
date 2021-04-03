@@ -23,8 +23,6 @@ class CollectionViewController: UICollectionViewController {
     var list2019: [Results] = []
     var page = 1
     
-    let formatter = DateFormatter()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +44,9 @@ class CollectionViewController: UICollectionViewController {
             
             case .success(let movies):
                 self.list = movies.results
-                //                print("list = \(self.list)")
                 for movie in self.list {
                     let date = movie.releaseDate?.convertToDateFormat()
-                                        print("date: \(date!)")
                     let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
-                    //                    print(components)
                     if components.year == 2019 {
                         
                         self.list2019.append(movie)
@@ -59,7 +54,6 @@ class CollectionViewController: UICollectionViewController {
                     }
                 }
                 DispatchQueue.main.async {
-                    print("loading")
                     self.collectionView.reloadData()
                     for movie in self.list2019 {
                         print("movie: \(movie.title), release date: \(movie.releaseDate!)")
@@ -80,13 +74,11 @@ class CollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return list2019.count
     }
     
@@ -97,11 +89,8 @@ class CollectionViewController: UICollectionViewController {
         cell.layer.shadowRadius = 2
         cell.layer.shadowOpacity = 0.5
         cell.layer.masksToBounds = false
-        
         cell.draw(cell.contentView.frame)
-        
-        
-        
+ 
         if list2019.isEmpty {
             cell.titleLabel.text = "title"
         } else {
@@ -110,7 +99,6 @@ class CollectionViewController: UICollectionViewController {
             //            cell.ratingProgressBar.progress = Float(list2019[indexPath.item].voteAverage / 10)
             cell.descriptionLabel.text = list2019[indexPath.item].overview
             cell.releaseDateLabel.text = list2019[indexPath.item].releaseDate!.convertToDateFormat().convertToStringFormat()
-//                .convertToDateFormat().convertToStringFormat()
             cell.downloadImage(fromURL: list2019[indexPath.item].posterPath)
         }
         return cell
@@ -125,7 +113,6 @@ class CollectionViewController: UICollectionViewController {
         
         if offsetY > contentHeight - height {
             page += 1
-            
             updateUI(for: page)
         }
     }

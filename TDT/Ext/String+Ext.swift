@@ -14,7 +14,6 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone(secondsFromGMT:0)
         if let output = dateFormatter.date(from: self) {
-            print(output)
             return output
         } else {
             return Date()

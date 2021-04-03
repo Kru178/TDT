@@ -11,7 +11,6 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     private let baseUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key="
-//    let cache = NSCache<NSString, UIImage>()
     let apiKey = "8ffda756f7cae9fc0afbfbeae03373d4"
     let end = "&language=en-US&page="
     
@@ -41,17 +40,12 @@ class NetworkManager {
                 return
             }
             
-//            let string = String(data: data, encoding: .utf8)
-//            print(string)
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let list = try decoder.decode(MovieList.self, from: data)
-//                print("no error")
-//                print(list)
                 completed(.success(list))
             } catch {
-//                print("data error")
                 completed(.failure(.invalidData))
             }
         }
@@ -59,29 +53,22 @@ class NetworkManager {
     }
     
     func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {
-//        let cacheKey = NSString(string: urlString)
-//
-//        if let image = cache.object(forKey: cacheKey) {
-//            completed(image)
-//            return
-//        }
+        
         
         guard let url = URL(string: urlString) else {
             completed(nil)
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { [ weak self ] (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-            guard let self = self,
-            error == nil,
+            guard error == nil,
             let response = response as? HTTPURLResponse, response.statusCode == 200,
             let data = data,
             let image = UIImage(data: data) else {
                 completed(nil)
                 return
             }
-//            self.cache.setObject(image, forKey: cacheKey)
             completed(image)
         }
         task.resume()
