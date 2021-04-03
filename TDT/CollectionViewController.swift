@@ -28,7 +28,7 @@ class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        formatter.dateFormat = "YYYY-MM-DD"
+        
         
         title = "Top 2019 Movies"
         
@@ -42,7 +42,7 @@ class CollectionViewController: UICollectionViewController {
                 self.list = movies.results
                 print("list = \(self.list)")
                 for movie in self.list {
-                    let date = self.formatter.date(from: movie.releaseDate!)
+                    let date = movie.releaseDate?.convertToDateFormat()
                     print("date: \(date!)")
                     let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
                     print(components)
@@ -108,7 +108,7 @@ class CollectionViewController: UICollectionViewController {
 //            cell.ratingLabel.text = "Rating: \(list2019[indexPath.item].voteAverage)"
 //            cell.ratingProgressBar.progress = Float(list2019[indexPath.item].voteAverage / 10)
             cell.descriptionLabel.text = list2019[indexPath.item].overview
-            cell.releaseDateLabel.text = "\(list2019[indexPath.item].releaseDate ?? "??")"
+            cell.releaseDateLabel.text = list2019[indexPath.item].releaseDate?.convertToDateFormat().convertToStringFormat()
             cell.downloadImage(fromURL: list2019[indexPath.item].posterPath)
         }
         return cell

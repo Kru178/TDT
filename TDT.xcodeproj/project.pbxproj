@@ -17,6 +17,8 @@
 		7885FCCD261384FB00247432 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCCC261384FB00247432 /* CollectionViewCell.swift */; };
 		7885FCD126139F7A00247432 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD026139F7A00247432 /* NetworkManager.swift */; };
 		7885FCD426139FF800247432 /* TDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD326139FF800247432 /* TDError.swift */; };
+		7885FCD7261846B300247432 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD6261846B300247432 /* String+Ext.swift */; };
+		7885FCDA2618492F00247432 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD92618492F00247432 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7885FCCC261384FB00247432 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		7885FCD026139F7A00247432 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7885FCD326139FF800247432 /* TDError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDError.swift; sourceTree = "<group>"; };
+		7885FCD6261846B300247432 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		7885FCD92618492F00247432 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +68,13 @@
 		7885FCAC261382E400247432 /* TDT */ = {
 			isa = PBXGroup;
 			children = (
-				7885FCAD261382E400247432 /* AppDelegate.swift */,
-				7885FCAF261382E400247432 /* SceneDelegate.swift */,
-				7885FCB3261382E400247432 /* Main.storyboard */,
 				7885FCD026139F7A00247432 /* NetworkManager.swift */,
 				7885FCD326139FF800247432 /* TDError.swift */,
 				7885FCCA261384BC00247432 /* Model */,
 				7885FCC42613835E00247432 /* CollectionViewController.swift */,
-				7885FCCC261384FB00247432 /* CollectionViewCell.swift */,
-				7885FCB6261382E900247432 /* Assets.xcassets */,
-				7885FCB8261382E900247432 /* LaunchScreen.storyboard */,
-				7885FCBB261382E900247432 /* Info.plist */,
+				7885FCDC26184C2300247432 /* Ext */,
+				7885FCE026184C8E00247432 /* Cell */,
+				7885FCDE26184C6F00247432 /* Support */,
 			);
 			path = TDT;
 			sourceTree = "<group>";
@@ -85,6 +85,36 @@
 				7885FCC72613844F00247432 /* Movie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7885FCDC26184C2300247432 /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCD92618492F00247432 /* Date+Ext.swift */,
+				7885FCD6261846B300247432 /* String+Ext.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
+		7885FCDE26184C6F00247432 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCAD261382E400247432 /* AppDelegate.swift */,
+				7885FCAF261382E400247432 /* SceneDelegate.swift */,
+				7885FCB3261382E400247432 /* Main.storyboard */,
+				7885FCB6261382E900247432 /* Assets.xcassets */,
+				7885FCB8261382E900247432 /* LaunchScreen.storyboard */,
+				7885FCBB261382E900247432 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		7885FCE026184C8E00247432 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7885FCCC261384FB00247432 /* CollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,12 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7885FCDA2618492F00247432 /* Date+Ext.swift in Sources */,
 				7885FCD126139F7A00247432 /* NetworkManager.swift in Sources */,
 				7885FCCD261384FB00247432 /* CollectionViewCell.swift in Sources */,
 				7885FCC52613835E00247432 /* CollectionViewController.swift in Sources */,
 				7885FCAE261382E400247432 /* AppDelegate.swift in Sources */,
 				7885FCC82613844F00247432 /* Movie.swift in Sources */,
 				7885FCD426139FF800247432 /* TDError.swift in Sources */,
+				7885FCD7261846B300247432 /* String+Ext.swift in Sources */,
 				7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +344,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 27ZNNP8X2D;
-				INFOPLIST_FILE = TDT/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TDT/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,7 +363,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 27ZNNP8X2D;
-				INFOPLIST_FILE = TDT/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TDT/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
