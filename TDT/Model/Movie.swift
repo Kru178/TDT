@@ -17,6 +17,8 @@ struct MovieList: Codable {
 
 
 struct Results: Codable {
+   
+    
 //    let popularity: Double?
 //    let voteCount: Int?
 //    let video: Bool?

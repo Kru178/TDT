@@ -13,8 +13,11 @@ class NetworkManager {
     private let baseUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key="
     let apiKey = "8ffda756f7cae9fc0afbfbeae03373d4"
     let end = "&language=en-US&page="
+    var movieList: [MovieList] = []
     
-    func getMovies(for page: Int, completed: @escaping (Result<MovieList, TDError>) -> Void) {
+    func getMovies(completed: @escaping (Result<MovieList, TDError>) -> Void) {
+//        for page: Int,
+        for page in 1...100 {
         let endpoint = baseUrl + apiKey
             + end + "\(page)"
         
@@ -45,11 +48,13 @@ class NetworkManager {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let list = try decoder.decode(MovieList.self, from: data)
                 completed(.success(list))
+                self.movieList.append(list)
             } catch {
                 completed(.failure(.invalidData))
             }
         }
         task.resume()
+    }
     }
     
     func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {

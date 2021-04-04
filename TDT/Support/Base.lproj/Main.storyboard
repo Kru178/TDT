@@ -73,10 +73,36 @@
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lf2-qf-7tp">
                                             <rect key="frame" x="160" y="10" width="50" height="50"/>
-                                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="84" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cle-qH-Feg">
+                                                    <rect key="frame" x="12.5" y="12.5" width="25" height="25"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="N0h-4v-3yk"/>
+                                                        <constraint firstAttribute="width" constant="25" id="sqL-DA-3am"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo7-Ey-UC4">
+                                                    <rect key="frame" x="37.5" y="18" width="9" height="9"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="9" id="Azl-ET-AAS"/>
+                                                        <constraint firstAttribute="height" constant="9" id="R6i-X1-GNj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <constraints>
+                                                <constraint firstItem="Cle-qH-Feg" firstAttribute="centerX" secondItem="Lf2-qf-7tp" secondAttribute="centerX" id="jG6-n9-GgE"/>
                                                 <constraint firstAttribute="width" constant="50" id="sGG-Tj-iMV"/>
                                                 <constraint firstAttribute="height" constant="50" id="uIs-0t-70t"/>
+                                                <constraint firstItem="bo7-Ey-UC4" firstAttribute="leading" secondItem="Cle-qH-Feg" secondAttribute="trailing" id="uNH-gn-HSy"/>
+                                                <constraint firstItem="Cle-qH-Feg" firstAttribute="centerY" secondItem="Lf2-qf-7tp" secondAttribute="centerY" id="wY7-Sq-Voa"/>
+                                                <constraint firstItem="bo7-Ey-UC4" firstAttribute="top" secondItem="Lf2-qf-7tp" secondAttribute="top" constant="18" id="yTj-jN-t6I"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -106,9 +132,10 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="cof-Bh-HhU" id="IXh-UJ-QX7"/>
                                     <outlet property="imageView" destination="jCD-Y4-Sud" id="Wga-FS-yiB"/>
+                                    <outlet property="progressSubView" destination="Lf2-qf-7tp" id="2V2-L1-xIU"/>
+                                    <outlet property="ratingLabel" destination="Cle-qH-Feg" id="Z1f-M8-I2y"/>
                                     <outlet property="releaseDateLabel" destination="GDB-9G-cMW" id="1ai-Gb-LNn"/>
                                     <outlet property="titleLabel" destination="O2o-38-ftC" id="elE-oB-sb4"/>
-                                    <outlet property="view" destination="Lf2-qf-7tp" id="UBz-bB-D1j"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -145,9 +172,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

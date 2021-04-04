@@ -15,59 +15,56 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var ratingProgressBar: UIProgressView!
-    @IBOutlet weak var view: UIView!
     
-    let cView = customView()
+    @IBOutlet weak var progressSubView: UIView!
+    var onReuse: () -> Void = {}
+    
     let progressView = ProgressView()
     
-    func downloadImage(fromURL url: String) {
-        let urlString = "https://image.tmdb.org/t/p/original/" + url
-        NetworkManager.shared.downloadImage(from: urlString) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.imageView.image = image }
-        }
-    }
+//    func downloadImage(fromURL url: String) {
+//        let urlString = "https://image.tmdb.org/t/p/original/" + url
+//        NetworkManager.shared.downloadImage(from: urlString) { [weak self] image in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async { self.imageView.image = image }
+//        }
+//    }
     
+    override func layoutSubviews() {
+        
+        self.contentView.layer.cornerRadius = 5.0
+        self.contentView.clipsToBounds = true
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 0.7
+        layer.cornerRadius = 5.0
+        layer.masksToBounds = false
+        draw(self.frame)
+        configure()
+    }
     
     
     func configure() {
-        view.addSubview(progressView)
-        view.addSubview(cView)
-        
-        
+        progressSubView.addSubview(progressView)
+        progressSubView.bringSubviewToFront(ratingLabel)
+        progressSubView.translatesAutoresizingMaskIntoConstraints = false
         progressView.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        cView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.frame = self.frame
+        progressView.frame = progressSubView.frame
         NSLayoutConstraint.activate([
-            progressView.leadingAnchor.constraint(equalTo: view.trailingAnchor),
-            progressView.topAnchor.constraint(equalTo: view.topAnchor),
-            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            progressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            progressView.centerXAnchor.constraint(equalTo: progressSubView.centerXAnchor),
+            progressView.centerYAnchor.constraint(equalTo: progressSubView.centerYAnchor)
         ])
-//        progressView.
-        cView.draw(self.frame, start: CGPoint(x: imageView.frame.size.width, y: self.frame.height - 30), end: CGPoint(x: self.frame.width, y: self.frame.height - 30))
+    }
+
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        onReuse()
+        self.imageView.image = nil
     }
     
-}
-
-class customView: UIView {
-    
-    func draw(_ rect: CGRect, start: CGPoint, end: CGPoint) {
-        
-        let aPath = UIBezierPath()
-        
-//        let startPoint = CGPoint(x: imageView.frame.size.width, y: self.frame.height - 30)
-//        let endPoint = CGPoint(x: self.frame.width, y: self.frame.height - 30)
-        
-        let startPoint = start
-        let endPoint = end
-
-        aPath.move(to: startPoint)
-        aPath.addLine(to: endPoint)
-
-        UIColor.lightGray.set()
-        aPath.lineWidth = 1.0
-        aPath.stroke()
-    }
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+            return layoutAttributes
+        }
 }
