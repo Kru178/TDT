@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		78481A4826189DCC00A07F42 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78481A4726189DCC00A07F42 /* ProgressView.swift */; };
+		7873545F2619E41600419148 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873545E2619E41600419148 /* DateViewController.swift */; };
 		787EBF612619A5AC00D5B56F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787EBF602619A5AC00D5B56F /* ImageLoader.swift */; };
 		7885FCAE261382E400247432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAD261382E400247432 /* AppDelegate.swift */; };
 		7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAF261382E400247432 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		78481A4726189DCC00A07F42 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		7873545E2619E41600419148 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		787EBF602619A5AC00D5B56F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		7885FCAA261382E400247432 /* TDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885FCAD261382E400247432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				7885FCC42613835E00247432 /* CollectionViewController.swift */,
+				7873545E2619E41600419148 /* DateViewController.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				7885FCD126139F7A00247432 /* NetworkManager.swift in Sources */,
 				7885FCCD261384FB00247432 /* CollectionViewCell.swift in Sources */,
 				7885FCC52613835E00247432 /* CollectionViewController.swift in Sources */,
+				7873545F2619E41600419148 /* DateViewController.swift in Sources */,
 				7885FCAE261382E400247432 /* AppDelegate.swift in Sources */,
 				787EBF612619A5AC00D5B56F /* ImageLoader.swift in Sources */,
 				7885FCC82613844F00247432 /* Movie.swift in Sources */,

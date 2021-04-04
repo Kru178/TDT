@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,6 +71,9 @@
                                             <state key="normal" title="Schedule Viewing">
                                                 <color key="titleColor" red="0.3411764706" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="wi7-vL-51d" kind="show" id="I9R-xx-uOr"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lf2-qf-7tp">
                                             <rect key="frame" x="160" y="10" width="50" height="50"/>
@@ -150,6 +154,46 @@
             </objects>
             <point key="canvasLocation" x="1214.4927536231885" y="116.51785714285714"/>
         </scene>
+        <!--Date View Controller-->
+        <scene sceneID="jvD-Rr-KcV">
+            <objects>
+                <viewController id="wi7-vL-51d" customClass="DateViewController" customModule="TDT" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DCv-cR-nr9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tuV-g7-4VO">
+                                <rect key="frame" x="0.0" y="88" width="414" height="500"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="BKZ-5Z-Ya5"/>
+                                </constraints>
+                            </datePicker>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Tv0-BY-nAD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tuV-g7-4VO" firstAttribute="top" secondItem="Tv0-BY-nAD" secondAttribute="top" id="A87-xU-CXZ"/>
+                            <constraint firstItem="tuV-g7-4VO" firstAttribute="leading" secondItem="Tv0-BY-nAD" secondAttribute="leading" id="Crb-Li-5b8"/>
+                            <constraint firstItem="tuV-g7-4VO" firstAttribute="trailing" secondItem="Tv0-BY-nAD" secondAttribute="trailing" id="Vbb-D4-34B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="G6s-fp-AwX">
+                        <barButtonItem key="rightBarButtonItem" title="Save Schedule" id="qRG-Et-7R0">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="wi7-vL-51d" id="p28-a0-ECE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="tuV-g7-4VO" id="dAt-4x-5fa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h9I-pa-Dej" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2143.4782608695655" y="126.5625"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="vyk-1P-yRM">
             <objects>
@@ -158,6 +202,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hWi-5M-HmG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="labelColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -170,6 +215,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
