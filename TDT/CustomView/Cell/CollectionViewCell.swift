@@ -73,5 +73,31 @@ class CollectionViewCell: UICollectionViewCell {
        
     }
    
+    func setup(with movie: Results) {
+        
+        
+        self.titleLabel.text = movie.title
+        self.descriptionLabel.text = movie.overview
+        self.releaseDateLabel.text = movie.releaseDate!.convertToDateFormat().convertToStringFormat()
+        self.progressView.shapeLayer.strokeEnd = CGFloat(movie.voteAverage / 10.0)
+        self.ratingLabel.text = "\(Int(movie.voteAverage * 10.0))"
+
+        let url = URL(string: "https://image.tmdb.org/t/p/original/" + movie.posterPath)
+
+        let token = ImageLoader.shared.loadImage(url!) { result in
+          do {
+            let image = try result.get()
+            DispatchQueue.main.async { self.imageView.image = image }
+          } catch {
+
+            print(error)
+          }
+        }
+        self.onReuse = {
+          if let token = token {
+            ImageLoader.shared.cancelLoad(token)
+          }  
+    }
+    }
 
 }

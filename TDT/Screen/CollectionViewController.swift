@@ -48,21 +48,16 @@ class CollectionViewController: UICollectionViewController {
             
             case .success(let movies):
                 self.list = movies.results
-//                print("qty: \(self.list.count)")
                 for movie in self.list {
                     let date = movie.releaseDate?.convertToDateFormat()
                     let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
                     if components.year == 2019 {
                         self.list2019.append(movie)
                         }
-                    
                 }
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-//                    for movie in self.list2019 {
-                    
-//                    }
                 }
                 
                 
@@ -91,35 +86,8 @@ class CollectionViewController: UICollectionViewController {
         
         guard !list2019.isEmpty else {return cell}
  
-        
-            cell.titleLabel.text = list2019[indexPath.item].title
-            cell.descriptionLabel.text = list2019[indexPath.item].overview
-            cell.releaseDateLabel.text = list2019[indexPath.item].releaseDate!.convertToDateFormat().convertToStringFormat()
-            cell.progressView.shapeLayer.strokeEnd = CGFloat(list2019[indexPath.item].voteAverage / 10.0)
-            cell.ratingLabel.text = "\(Int(list2019[indexPath.item].voteAverage * 10.0))"
-
-            let url = URL(string: "https://image.tmdb.org/t/p/original/" + list2019[indexPath.item].posterPath)
-
-            let token = ImageLoader.shared.loadImage(url!) { result in
-              do {
-                let image = try result.get()
-                DispatchQueue.main.async {
-                    
-                    cell.imageView.image = image
-                }
-                
-              } catch {
-
-                print(error)
-              }
-            }
-            cell.onReuse = {
-              if let token = token {
-                ImageLoader.shared.cancelLoad(token)
-              }
+        cell.setup(with: list2019[indexPath.item])
             
-            
-        }
         return cell
     }
 }
