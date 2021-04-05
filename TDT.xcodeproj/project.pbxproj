@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		78481A4826189DCC00A07F42 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78481A4726189DCC00A07F42 /* ProgressView.swift */; };
 		7873545F2619E41600419148 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873545E2619E41600419148 /* DateViewController.swift */; };
-		787EBF612619A5AC00D5B56F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787EBF602619A5AC00D5B56F /* ImageLoader.swift */; };
+		78735464261B9E7D00419148 /* UIImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78735463261B9E7D00419148 /* UIImageLoader.swift */; };
+		78735467261B9ED600419148 /* ImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78735466261B9ED600419148 /* ImageView+Ext.swift */; };
+		787EBF612619A5AC00D5B56F /* ImagesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787EBF602619A5AC00D5B56F /* ImagesLoader.swift */; };
 		7885FCAE261382E400247432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAD261382E400247432 /* AppDelegate.swift */; };
 		7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCAF261382E400247432 /* SceneDelegate.swift */; };
 		7885FCB5261382E400247432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7885FCB3261382E400247432 /* Main.storyboard */; };
@@ -27,7 +29,9 @@
 /* Begin PBXFileReference section */
 		78481A4726189DCC00A07F42 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		7873545E2619E41600419148 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
-		787EBF602619A5AC00D5B56F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		78735463261B9E7D00419148 /* UIImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageLoader.swift; sourceTree = "<group>"; };
+		78735466261B9ED600419148 /* ImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+Ext.swift"; sourceTree = "<group>"; };
+		787EBF602619A5AC00D5B56F /* ImagesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLoader.swift; sourceTree = "<group>"; };
 		7885FCAA261382E400247432 /* TDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885FCAD261382E400247432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7885FCAF261382E400247432 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				7885FCD026139F7A00247432 /* NetworkManager.swift */,
-				787EBF602619A5AC00D5B56F /* ImageLoader.swift */,
+				787EBF602619A5AC00D5B56F /* ImagesLoader.swift */,
+				78735463261B9E7D00419148 /* UIImageLoader.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 			children = (
 				7885FCD92618492F00247432 /* Date+Ext.swift */,
 				7885FCD6261846B300247432 /* String+Ext.swift */,
+				78735466261B9ED600419148 /* ImageView+Ext.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -234,12 +240,14 @@
 				7885FCC52613835E00247432 /* CollectionViewController.swift in Sources */,
 				7873545F2619E41600419148 /* DateViewController.swift in Sources */,
 				7885FCAE261382E400247432 /* AppDelegate.swift in Sources */,
-				787EBF612619A5AC00D5B56F /* ImageLoader.swift in Sources */,
+				787EBF612619A5AC00D5B56F /* ImagesLoader.swift in Sources */,
 				7885FCC82613844F00247432 /* Movie.swift in Sources */,
 				7885FCD426139FF800247432 /* TDError.swift in Sources */,
 				78481A4826189DCC00A07F42 /* ProgressView.swift in Sources */,
 				7885FCD7261846B300247432 /* String+Ext.swift in Sources */,
+				78735467261B9ED600419148 /* ImageView+Ext.swift in Sources */,
 				7885FCB0261382E400247432 /* SceneDelegate.swift in Sources */,
+				78735464261B9E7D00419148 /* UIImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

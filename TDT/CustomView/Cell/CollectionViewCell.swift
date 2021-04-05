@@ -22,13 +22,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     let progressView = ProgressView()
     
-//    func downloadImage(fromURL url: String) {
-//        let urlString = "https://image.tmdb.org/t/p/original/" + url
-//        NetworkManager.shared.downloadImage(from: urlString) { [weak self] image in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async { self.imageView.image = image }
-//        }
-//    }
     
     override func layoutSubviews() {
         
@@ -62,7 +55,8 @@ class CollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         onReuse()
-        self.imageView.image = nil
+        imageView.image = nil
+        imageView.cancelImageLoad()
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -76,28 +70,15 @@ class CollectionViewCell: UICollectionViewCell {
     func setup(with movie: Results) {
         
         
-        self.titleLabel.text = movie.title
-        self.descriptionLabel.text = movie.overview
-        self.releaseDateLabel.text = movie.releaseDate!.convertToDateFormat().convertToStringFormat()
-        self.progressView.shapeLayer.strokeEnd = CGFloat(movie.voteAverage / 10.0)
-        self.ratingLabel.text = "\(Int(movie.voteAverage * 10.0))"
-
+        titleLabel.text = movie.title
+        descriptionLabel.text = movie.overview
+        releaseDateLabel.text = movie.releaseDate!.convertToDateFormat().convertToStringFormat()
+        progressView.shapeLayer.strokeEnd = CGFloat(movie.voteAverage / 10.0)
+        ratingLabel.text = "\(Int(movie.voteAverage * 10.0))"
+        
         let url = URL(string: "https://image.tmdb.org/t/p/original/" + movie.posterPath)
+        imageView.loadImage(at: url!)
 
-        let token = ImageLoader.shared.loadImage(url!) { result in
-          do {
-            let image = try result.get()
-            DispatchQueue.main.async { self.imageView.image = image }
-          } catch {
-
-            print(error)
-          }
-        }
-        self.onReuse = {
-          if let token = token {
-            ImageLoader.shared.cancelLoad(token)
-          }  
-    }
     }
 
 }

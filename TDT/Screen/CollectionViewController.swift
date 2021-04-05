@@ -35,9 +35,6 @@ class CollectionViewController: UICollectionViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        ImageLoader.shared.empty()
-    }
     
     func updateUI(for page: Int) {
         
