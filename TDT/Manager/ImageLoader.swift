@@ -33,7 +33,7 @@ class ImageLoader {
 //            print("image size: \(image.size)")
           let resizedImage = self.resizedImageWith(image: image)
           self.loadedImages[url] = resizedImage
-          completion(.success(image))
+          completion(.success(resizedImage))
           return
         }
 

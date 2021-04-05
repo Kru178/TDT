@@ -13,7 +13,7 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     let center = UNUserNotificationCenter.current()
-    let movie = "Movie"
+//    var movie = "Movie"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         let content = UNMutableNotificationContent()
         content.title = "Reminder!"
-        content.body = "It's time to watch \(movie)"
+        content.body = "It's time to watch a movie"
         content.categoryIdentifier = "alarm"
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
@@ -87,7 +87,7 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     func showAlert(for date: Date) {
         let str = date.convertToDateAndTime()
-        let ac = UIAlertController(title: "Scheduled!", message: "We will remind you to watch the \(movie) movie on \(str)", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Scheduled!", message: "We will remind you to watch the movie on \(str)", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         ac.addAction(action)
         present(ac, animated: true)

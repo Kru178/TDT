@@ -72,7 +72,8 @@
                                                 <color key="titleColor" red="0.3411764706" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <segue destination="wi7-vL-51d" kind="show" id="I9R-xx-uOr"/>
+                                                <action selector="scheduleButtonPressed:" destination="cdC-yk-2v0" eventType="touchUpInside" id="Diu-aj-wss"/>
+                                                <segue destination="wi7-vL-51d" kind="show" id="hJ2-g3-XjQ"/>
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lf2-qf-7tp">
@@ -134,6 +135,7 @@
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="button" destination="nvR-6o-HLK" id="etS-w9-jr4"/>
                                     <outlet property="descriptionLabel" destination="cof-Bh-HhU" id="IXh-UJ-QX7"/>
                                     <outlet property="imageView" destination="jCD-Y4-Sud" id="Wga-FS-yiB"/>
                                     <outlet property="progressSubView" destination="Lf2-qf-7tp" id="2V2-L1-xIU"/>

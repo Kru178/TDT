@@ -16,6 +16,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var ratingProgressBar: UIProgressView!
     
+    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var progressSubView: UIView!
     var onReuse: () -> Void = {}
     
@@ -39,7 +40,7 @@ class CollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.7
         layer.cornerRadius = 5.0
         layer.masksToBounds = false
-        draw(self.frame)
+        
         configure()
     }
     
@@ -67,4 +68,10 @@ class CollectionViewCell: UICollectionViewCell {
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
             return layoutAttributes
         }
+
+    @IBAction func scheduleButtonPressed(_ sender: UIButton) {
+       
+    }
+   
+
 }
