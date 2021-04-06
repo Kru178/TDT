@@ -8,19 +8,18 @@
 import UIKit
 
 class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
-    
-    
+ 
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var movieTitle: String = ""
     let center = UNUserNotificationCenter.current()
-//    var movie = "Movie"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         datePicker.preferredDatePickerStyle = .inline
         datePicker.timeZone = TimeZone.current
-        
         center.delegate = self
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
@@ -31,9 +30,9 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
-    
+
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        
+        print("movie: \(movieTitle)")
         let date = datePicker.date
         print(date.convertToDateAndTime())
         scheduleNotification(date: date)
@@ -44,7 +43,7 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         let content = UNMutableNotificationContent()
         content.title = "Reminder!"
-        content.body = "It's time to watch a movie"
+        content.body = "It's time to watch \(movieTitle)"
         content.categoryIdentifier = "alarm"
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
@@ -65,7 +64,6 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
         dateComponents.year = year
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)  { (error) in
             if let error = error {
@@ -78,16 +76,17 @@ class DateViewController: UIViewController, UNUserNotificationCenterDelegate {
                 }
             }
         }
-        
     }
+    
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound])
     }
     
+    
     func showAlert(for date: Date) {
         let str = date.convertToDateAndTime()
-        let ac = UIAlertController(title: "Scheduled!", message: "We will remind you to watch the movie on \(str)", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Scheduled!", message: "We will remind you to watch the \(movieTitle) movie on \(str)", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         ac.addAction(action)
         present(ac, animated: true)

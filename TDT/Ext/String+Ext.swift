@@ -12,7 +12,6 @@ extension String {
     func convertToDateFormat() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-//        dateFormatter.timeZone = TimeZone(secondsFromGMT:0)
         if let output = dateFormatter.date(from: self) {
             return output
         } else {

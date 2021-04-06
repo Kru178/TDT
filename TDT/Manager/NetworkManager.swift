@@ -14,10 +14,10 @@ class NetworkManager {
     let apiKey = "8ffda756f7cae9fc0afbfbeae03373d4"
     let end = "&language=en-US&page="
     var movieList: [MovieList] = []
+    var dataArray: [Data] = []
     
-    func getMovies(completed: @escaping (Result<MovieList, TDError>) -> Void) {
-//        for page: Int,
-        for page in 1...100 {
+    func getMovies(for page: Int, completed: @escaping (Result<MovieList, TDError>) -> Void) {
+//        for page in 1...100 {
         let endpoint = baseUrl + apiKey
             + end + "\(page)"
         
@@ -26,7 +26,7 @@ class NetworkManager {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            let task = URLSession.shared.dataTask(with: url) { [self] data, response, error in
             
             if let _ = error {
                 completed(.failure(.unableToComplete))
@@ -43,6 +43,7 @@ class NetworkManager {
                 return
             }
             
+                self.dataArray.append(data)
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -54,7 +55,6 @@ class NetworkManager {
             }
         }
         task.resume()
+//    }
     }
-    }
-
 }

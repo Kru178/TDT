@@ -19,8 +19,8 @@ class CollectionViewController: UICollectionViewController {
     
     private let itemsPerRow: CGFloat = 1
     
-    var list: [Results] = []
-    var list2019: [Results] = []
+    var list: [Movie] = []
+    var list2019: [Movie] = []
     var page = 1
     
     
@@ -30,7 +30,7 @@ class CollectionViewController: UICollectionViewController {
         self.collectionView.alwaysBounceVertical = true
         
         title = "Top 2019 Movies"
-      
+        
         updateUI(for: page)
         
     }
@@ -38,7 +38,7 @@ class CollectionViewController: UICollectionViewController {
     
     func updateUI(for page: Int) {
         
-        NetworkManager.shared.getMovies() { [weak self] (result) in
+        NetworkManager.shared.getMovies(for: page) { [weak self] (result) in
             guard let self = self else {return}
             
             switch result {
@@ -50,13 +50,9 @@ class CollectionViewController: UICollectionViewController {
                     let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
                     if components.year == 2019 {
                         self.list2019.append(movie)
-                        }
+                    }
                 }
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-                
+                DispatchQueue.main.async { self.collectionView.reloadData() }
                 
             case .failure(let error):
                 print("nil")
@@ -73,21 +69,39 @@ class CollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("qty 2019: \(self.list2019.count)")
         return list2019.count
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
-        
         guard !list2019.isEmpty else {return cell}
- 
+        
         cell.setup(with: list2019[indexPath.item])
-            
+        
         return cell
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as? DateViewController
+        destVC?.movieTitle = "Parasite"
+    }
+    
+    // MARK: UICollectionViewDelegate
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            page += 1
+            updateUI(for: page)
+        }
+    }
 }
+
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     
@@ -103,6 +117,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthPerItem, height: widthPerItem - 150)
     }
     
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -110,6 +125,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     ) -> UIEdgeInsets {
         return sectionInsets
     }
+    
     
     func collectionView(
         _ collectionView: UICollectionView,

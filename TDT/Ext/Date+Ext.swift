@@ -16,6 +16,7 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    
     func convertToDateAndTime() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, d MMM y HH:mm"

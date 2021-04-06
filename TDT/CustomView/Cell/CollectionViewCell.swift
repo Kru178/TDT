@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -14,19 +15,22 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var ratingProgressBar: UIProgressView!
-    
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var progressSubView: UIView!
-    var onReuse: () -> Void = {}
     
+    var onReuse: () -> Void = {}
     let progressView = ProgressView()
     
     
     override func layoutSubviews() {
         
-        self.contentView.layer.cornerRadius = 5.0
-        self.contentView.clipsToBounds = true
+        configure()
+    }
+    
+    
+    func configure() {
+        contentView.layer.cornerRadius = 5.0
+        contentView.clipsToBounds = true
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowRadius = 3.0
@@ -34,11 +38,6 @@ class CollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 5.0
         layer.masksToBounds = false
         
-        configure()
-    }
-    
-    
-    func configure() {
         progressSubView.addSubview(progressView)
         progressSubView.bringSubviewToFront(ratingLabel)
         progressSubView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,29 +55,36 @@ class CollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         onReuse()
         imageView.image = nil
+        titleLabel.text = nil
+        releaseDateLabel.text = nil
+        descriptionLabel.text = nil
+        ratingLabel.text = nil
+        
         imageView.cancelImageLoad()
     }
+    
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
             return layoutAttributes
         }
 
+    
     @IBAction func scheduleButtonPressed(_ sender: UIButton) {
-       
     }
-   
-    func setup(with movie: Results) {
-        
-        
+
+    
+    func setup(with movie: Movie) {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
-        releaseDateLabel.text = movie.releaseDate!.convertToDateFormat().convertToStringFormat()
-        progressView.shapeLayer.strokeEnd = CGFloat(movie.voteAverage / 10.0)
-        ratingLabel.text = "\(Int(movie.voteAverage * 10.0))"
+        releaseDateLabel.text = movie.releaseDate?.convertToDateFormat().convertToStringFormat()
         
-        let url = URL(string: "https://image.tmdb.org/t/p/original/" + movie.posterPath)
-        imageView.loadImage(at: url!)
-
+        guard let vote = movie.voteAverage else {return}
+        progressView.shapeLayer.strokeEnd = CGFloat(vote / 10.0)
+        ratingLabel.text = "\(Int(vote * 10.0))"
+        
+        guard let path = movie.posterPath else {return}
+        guard let url = URL(string: "https://image.tmdb.org/t/p/original/" + path) else {return}
+        imageView.loadImage(at: url)
     }
 
 }
