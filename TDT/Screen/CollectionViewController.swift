@@ -44,14 +44,8 @@ class CollectionViewController: UICollectionViewController {
             switch result {
             
             case .success(let movies):
-                self.list = movies.results
-                for movie in self.list {
-                    let date = movie.releaseDate?.convertToDateFormat()
-                    let components = Calendar.current.dateComponents([.year, .month, .day], from: date!)
-                    if components.year == 2019 {
-                        self.list2019.append(movie)
-                    }
-                }
+                self.list += movies.results
+
                 DispatchQueue.main.async { self.collectionView.reloadData() }
                 
             case .failure(let error):
@@ -69,15 +63,15 @@ class CollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list2019.count
+        return list.count
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
-        guard !list2019.isEmpty else {return cell}
+        guard !list.isEmpty else {return cell}
         
-        cell.setup(with: list2019[indexPath.item])
+        cell.setup(with: list[indexPath.item])
         
         return cell
     }
