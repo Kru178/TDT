@@ -14,19 +14,17 @@ class ImagesLoader {
     private var runningRequests = [UUID: URLSessionDataTask]()
     
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
-        
         if let image = loadedImages[url] {
             completion(.success(image))
             return nil
         }
-        
         let uuid = UUID()
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            
-            guard let self = self else {return}
-            defer {self.runningRequests.removeValue(forKey: uuid) }
-            
+            guard let self = self else { return }
+            defer {
+                self.runningRequests.removeValue(forKey: uuid)
+            }
             if let data = data, let image = UIImage(data: data) {
                 let resizedImage = self.resizedImageWith(image: image)
                 self.loadedImages[url] = resizedImage
@@ -47,15 +45,12 @@ class ImagesLoader {
         return uuid
     }
     
-    
     func cancelLoad(_ uuid: UUID) {
         runningRequests[uuid]?.cancel()
         runningRequests.removeValue(forKey: uuid)
     }
     
-    
     func resizedImageWith(image: UIImage) -> UIImage {
-        
         let targetSize = CGSize(width: 150, height: 210)
         let imageSize = image.size
         let newWidth  = targetSize.width  / image.size.width
@@ -69,11 +64,8 @@ class ImagesLoader {
         }
         
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        
         image.draw(in: rect)
-        
         guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else {return image}
         UIGraphicsEndImageContext()
         

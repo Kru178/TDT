@@ -13,7 +13,6 @@ extension UIImageView {
     UIImageLoader.loader.load(url, for: self)
   }
 
-    
   func cancelImageLoad() {
     UIImageLoader.loader.cancel(for: self)
   }

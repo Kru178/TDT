@@ -8,15 +8,12 @@
 import Foundation
 
 struct MovieList: Codable {
-    
     let page: Int
     let totalPages: Int?
     let results: [Movie]
 }
 
-
 struct Movie: Codable {
-   
     let posterPath: String?
     let id: Int
     let title: String

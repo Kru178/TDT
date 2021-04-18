@@ -7,8 +7,11 @@
 
 import UIKit
 
+protocol MovieCollectionViewCellDelegate: class {
+    func collectionViewCell(_ collectionViewCell: MovieCollectionViewCell, didSelectMovie movie: Movie)
+}
 
-class CollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -18,15 +21,15 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var progressSubView: UIView!
     
-    var onReuse: () -> Void = {}
+    static let reuseIdentifier = "CollectionViewCell"
+    private var movie: Movie?
     let progressView = ProgressView()
-    
-    
+    weak var delegate: MovieCollectionViewCellDelegate?
+  
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
         configure()
     }
-    
     
     func configure() {
         contentView.layer.cornerRadius = 5.0
@@ -50,10 +53,8 @@ class CollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-        onReuse()
         imageView.image = nil
         titleLabel.text = nil
         releaseDateLabel.text = nil
@@ -63,28 +64,29 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.cancelImageLoad()
     }
     
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-            return layoutAttributes
-        }
-
-    
-    @IBAction func scheduleButtonPressed(_ sender: UIButton) {
-    }
-
-    
     func setup(with movie: Movie) {
+        self.movie = movie
+        
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         releaseDateLabel.text = movie.releaseDate?.convertToDateFormat().convertToStringFormat()
         
-        guard let vote = movie.voteAverage else {return}
+        guard let vote = movie.voteAverage else { return }
         progressView.shapeLayer.strokeEnd = CGFloat(vote / 10.0)
         ratingLabel.text = "\(Int(vote * 10.0))"
         
         guard let path = movie.posterPath else {return}
-        guard let url = URL(string: "https://image.tmdb.org/t/p/original/" + path) else {return}
+        guard let url = URL(string: "https://image.tmdb.org/t/p/original/" + path) else {
+            return
+        }
         imageView.loadImage(at: url)
+    }
+
+    @IBAction func schedule(_ sender: UIButton) {
+        guard let movie = movie else {
+            return
+        }
+        delegate?.collectionViewCell(self, didSelectMovie: movie)
     }
 
 }
