@@ -8,9 +8,9 @@
 import Foundation
 import NotificationCenter
 
-class NotificationCenter {
+class NotificationScheduleCenter {
     
-    static let shared = NotificationCenter()
+    static let shared = NotificationScheduleCenter()
     
     func scheduleNotification(for vc: UIViewController, movie: Movie, date: Date) {
         let content = UNMutableNotificationContent()

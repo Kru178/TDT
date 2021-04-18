@@ -21,7 +21,7 @@ class DateViewController: UIViewController {
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         let date = datePicker.date
-        NotificationCenter.shared.scheduleNotification(for: self, movie: movie, date: date)
+        NotificationScheduleCenter.shared.scheduleNotification(for: self, movie: movie, date: date)
     }
 }
 

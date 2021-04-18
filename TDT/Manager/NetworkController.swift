@@ -18,7 +18,8 @@ class NetworkController {
     let apiKey = "api_key=8ffda756f7cae9fc0afbfbeae03373d4"
     let end = "&language=en-US&year=2019&page="
     
-    func getMovies(anObject: NetworkControllerDelegate, for page: Int, completed: @escaping (Result<MovieList, TDError>) -> Void) {
+    func getMovies(anObject: NetworkControllerDelegate, for page: Int,
+                   completed: @escaping (Result<MovieList, TDError>) -> Void) {
         let endpoint = baseUrl + apiKey + end + "\(page)"
         
         anObject.get(resourceType: endpoint){ result in
@@ -46,13 +47,13 @@ class NetworkController {
 extension URLSession : NetworkControllerDelegate {
     
     func get(resourceType: String, completed: @escaping (Result<Data, TDError>) -> Void) {
-        
         guard let url = URL(string: resourceType) else {
             completed(.failure(.invalidURL))
             return
         }
         let request = URLRequest(url: url)
-        let newTask = URLSession.shared.dataTask(with: request) { (possibleData, possibleResponse, possibleError) in
+        let newTask = URLSession.shared.dataTask(with: request)
+        { (possibleData, possibleResponse, possibleError) in
             
             guard possibleError == nil else {
                 completed(.failure(.unableToComplete))

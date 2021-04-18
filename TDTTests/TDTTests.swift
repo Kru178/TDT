@@ -33,10 +33,8 @@ class TDTTests: XCTestCase {
             case .success(let list):
                 XCTAssert(!list.results.isEmpty)
             }
-            
             expectation.fulfill()
         }
-        
         waitForExpectations(timeout: 5) { possibleError in
             print("Finished waiting: \(String(describing: possibleError))")
         }   
@@ -57,10 +55,8 @@ class TDTTests: XCTestCase {
             case .success:
                 XCTFail()
             }
-            
             expectation.fulfill()
         }
-        
         waitForExpectations(timeout: 5) { possibleError in
             print("Finished waiting: \(String(describing: possibleError))")
         }
@@ -69,7 +65,6 @@ class TDTTests: XCTestCase {
     
     func testFailureWithEmptyDataMovieFetch() throws {
         
-        // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for movies")
         
         let networkController = NetworkController()
@@ -83,10 +78,8 @@ class TDTTests: XCTestCase {
             case .success:
                 XCTFail()
             }
-            
             expectation.fulfill()
         }
-        
         waitForExpectations(timeout: 5) { possibleError in
             print("Finished waiting: \(String(describing: possibleError))")
         }
@@ -94,7 +87,6 @@ class TDTTests: XCTestCase {
     
     func testFailureWithCorruptJSONMovieFetch() throws {
         
-        // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for planets")
         
         let invalidJSONData = TestData.invalidJSONString.rawValue.data(using: .utf8)
@@ -109,10 +101,8 @@ class TDTTests: XCTestCase {
             case .success:
                 XCTFail()
             }
-            
             expectation.fulfill()
         }
-        
         waitForExpectations(timeout: 5) { possibleError in
             print("Finished waiting: \(String(describing: possibleError))")
         }
