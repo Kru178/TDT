@@ -28,7 +28,7 @@ class MovieCollectionViewController: UICollectionViewController {
     }
     
     func update(for page: Int) {
-        NetworkManager.shared.getMovies(for: page) { [weak self] (result) in
+        NetworkController.shared.getMovies(anObject: URLSession.shared, for: page) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let movies):

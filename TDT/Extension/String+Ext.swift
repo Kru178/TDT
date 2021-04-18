@@ -13,8 +13,10 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let output = dateFormatter.date(from: self) {
+            print("output: \(output)")
             return output
         } else {
+//            failure?
             return Date()
         }
     }

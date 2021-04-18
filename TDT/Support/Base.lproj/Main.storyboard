@@ -31,7 +31,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="340" height="210"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2o-38-ftC">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2o-38-ftC">
                                             <rect key="frame" x="220" y="0.0" width="120" height="50"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <nil key="textColor"/>
@@ -89,24 +89,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo7-Ey-UC4">
-                                                    <rect key="frame" x="37.5" y="18" width="9" height="9"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="9" id="Azl-ET-AAS"/>
-                                                        <constraint firstAttribute="height" constant="9" id="R6i-X1-GNj"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Cle-qH-Feg" firstAttribute="centerX" secondItem="Lf2-qf-7tp" secondAttribute="centerX" id="jG6-n9-GgE"/>
                                                 <constraint firstAttribute="width" constant="50" id="sGG-Tj-iMV"/>
                                                 <constraint firstAttribute="height" constant="50" id="uIs-0t-70t"/>
-                                                <constraint firstItem="bo7-Ey-UC4" firstAttribute="leading" secondItem="Cle-qH-Feg" secondAttribute="trailing" id="uNH-gn-HSy"/>
                                                 <constraint firstItem="Cle-qH-Feg" firstAttribute="centerY" secondItem="Lf2-qf-7tp" secondAttribute="centerY" id="wY7-Sq-Voa"/>
-                                                <constraint firstItem="bo7-Ey-UC4" firstAttribute="top" secondItem="Lf2-qf-7tp" secondAttribute="top" constant="18" id="yTj-jN-t6I"/>
                                             </constraints>
                                         </view>
                                     </subviews>
