@@ -21,8 +21,10 @@ class TDTTests: XCTestCase {
         
         let expectation = self.expectation(description: "Waiting for movies")
         
+        let validJSONData = TestData.validJSONString.rawValue.data(using: .utf8)
         let networkController = NetworkController()
-        networkController.getMovies(anObject: URLSession.shared, for: 1) { result in
+        let mockSession = MockSession(result: .success(validJSONData!))
+        networkController.getMovies(anObject: mockSession, for: 1) { result in
             switch result {
             
             case .failure:
@@ -40,7 +42,7 @@ class TDTTests: XCTestCase {
         }   
     }
     
-    func testFailureMovieGet() throws {
+    func testFailureMovieFetch() throws {
         
         let expectation = self.expectation(description: "Waiting for movies")
         
@@ -65,7 +67,7 @@ class TDTTests: XCTestCase {
         
     }
     
-    func testFailureWithEmptyDataMovieGet() throws {
+    func testFailureWithEmptyDataMovieFetch() throws {
         
         // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for movies")
@@ -90,41 +92,12 @@ class TDTTests: XCTestCase {
         }
     }
     
-    func testFailureWithCorruptJSONMovieGet() throws {
+    func testFailureWithCorruptJSONMovieFetch() throws {
         
         // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for planets")
         
-        let invalidJSONString = """
-        {
-        "page": 1,
-        "results": [
-        {
-        "adult": false,
-        "backdrop_path": "/h9DIlghaiTxbQbt1FIwKNbQvEL.jpg",
-        "genre_ids": [
-        28,
-        12,
-        53
-        ],
-        "id": 581387,
-        "original_language": "ko",
-        "original_title": "백두산",
-        "overview": "A group of unlikely heroes from across the Korean peninsula try to save the day after a volcano erupts on the mythical and majestic Baekdu Mountain.",
-        "popularity": 669.563,
-        "poster_path": "/zoeKREZ2IdAUnXISYCS0E6H5BVh.jpg",
-        "release_date": "2019-12-19",
-        "title": "Ashfall",
-        "video": false,
-        "vote_average": 6.5,
-        "vote_count": 231
-        }
-        ]
-        
-        """
-        
-        let invalidJSONData = invalidJSONString.data(using: .utf8)
-        
+        let invalidJSONData = TestData.invalidJSONString.rawValue.data(using: .utf8)
         let networkController = NetworkController()
         let mockSession = MockSession(result: .success(invalidJSONData!))
         networkController.getMovies(anObject: mockSession, for: 1) { (result) in
