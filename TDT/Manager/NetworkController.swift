@@ -22,25 +22,23 @@ class NetworkController {
         let endpoint = baseUrl + apiKey + end + "\(page)"
         
         anObject.get(resourceType: endpoint){ result in
-
-            switch result {
             
+            switch result {
             case .failure(let error):
                 completed(.failure(error))
                 
             case .success(let data):
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let list = try decoder.decode(MovieList.self, from: data)
-                DispatchQueue.main.async {
-                    completed(.success(list))
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let list = try decoder.decode(MovieList.self, from: data)
+                    DispatchQueue.main.async {
+                        completed(.success(list))
+                    }
+                } catch {
+                    completed(.failure(.invalidData))
                 }
-            } catch {
-                completed(.failure(.invalidData))
             }
-        }
         }
     }
 }
@@ -49,7 +47,6 @@ extension URLSession : NetworkControllerDelegate {
     
     func get(resourceType: String, completed: @escaping (Result<Data, TDError>) -> Void) {
         
-        // Creating the URL and its request.
         guard let url = URL(string: resourceType) else {
             completed(.failure(.invalidURL))
             return
@@ -61,27 +58,21 @@ extension URLSession : NetworkControllerDelegate {
                 completed(.failure(.unableToComplete))
                 return
             }
-            
             guard let response = possibleResponse as? HTTPURLResponse else {
                 completed(.failure(.invalidResponse))
                 return
             }
-            
             guard (200...299).contains(response.statusCode) else {
                 completed(.failure(.invalidResponse))
                 return
             }
-            
             guard let receivedData = possibleData else {
                 completed(.failure(.invalidData))
                 return
             }
-            
             completed(.success(receivedData))
         }
-        
-        // Sending the request.
         newTask.resume()
     }
-
+    
 }

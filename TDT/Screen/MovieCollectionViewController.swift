@@ -39,9 +39,9 @@ class MovieCollectionViewController: UICollectionViewController {
             }
         }
     }
-        
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
@@ -78,8 +78,7 @@ class MovieCollectionViewController: UICollectionViewController {
 
 extension MovieCollectionViewController: MovieCollectionViewCellDelegate {
     func collectionViewCell(_ collectionViewCell: MovieCollectionViewCell, didSelectMovie movie: Movie) {
-         self.selectedMovie = movie
-        print(movie.title)
+        self.selectedMovie = movie
         performSegue(withIdentifier: "dateSegue", sender: nil)
     }
 }

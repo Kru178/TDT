@@ -40,7 +40,7 @@ class TDTTests: XCTestCase {
         }   
     }
     
-    func testFailurePlanetFetch() throws {
+    func testFailureMovieGet() throws {
         
         let expectation = self.expectation(description: "Waiting for movies")
         
@@ -65,7 +65,7 @@ class TDTTests: XCTestCase {
         
     }
     
-    func testFailureWithEmptyDataPlanetFetch() throws {
+    func testFailureWithEmptyDataMovieGet() throws {
         
         // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for movies")
@@ -90,7 +90,7 @@ class TDTTests: XCTestCase {
         }
     }
     
-    func testFailureWithCorruptJSONPlanetFetch() throws {
+    func testFailureWithCorruptJSONMovieGet() throws {
         
         // Allows us to continue to the end of the function.
         let expectation = self.expectation(description: "Waiting for planets")
@@ -120,7 +120,7 @@ class TDTTests: XCTestCase {
         "vote_count": 231
         }
         ]
-        }
+        
         """
         
         let invalidJSONData = invalidJSONString.data(using: .utf8)
