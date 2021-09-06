@@ -17,8 +17,10 @@ struct Movie: Codable {
     let posterPath: String?
     let id: Int
     let title: String
-    let voteAverage: Double?
+    let voteAverage: Double
     let overview: String?
-    let releaseDate: String?
+    let releaseDate: String
+    let backdropPath: String?
+    let tagline: String?
 }
 

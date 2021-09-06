@@ -22,7 +22,7 @@ class MovieCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.alwaysBounceVertical = true
-        title = "Top 2019 Movies"
+        title = "Top Movies"
         
         update(for: page)
     }
@@ -33,7 +33,7 @@ class MovieCollectionViewController: UICollectionViewController {
             switch result {
             case .success(let movies):
                 self.list += movies.results
-                self.collectionView.reloadData()
+                self.collectionView.reloadSections(IndexSet(integer: 0))
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -57,12 +57,23 @@ class MovieCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destVC = segue.destination as? DateViewController {
-            destVC.movie = self.selectedMovie
+        if segue.identifier == "dateSegue" {
+            if let destVC = segue.destination as? DateViewController {
+                destVC.movie = self.selectedMovie
+            }
+        } else if segue.identifier == "detailSegue" {
+            if let destVC = segue.destination as? DetailViewController {
+                destVC.movie = self.selectedMovie
+            }
         }
     }
     
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedMovie = list[indexPath.item]
+        performSegue(withIdentifier: "detailSegue", sender: nil)
+    }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY = scrollView.contentOffset.y

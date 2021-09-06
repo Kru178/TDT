@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MovieCollectionViewCellDelegate: class {
+protocol MovieCollectionViewCellDelegate: AnyObject {
     func collectionViewCell(_ collectionViewCell: MovieCollectionViewCell, didSelectMovie movie: Movie)
 }
 
@@ -69,9 +69,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
-        releaseDateLabel.text = movie.releaseDate?.convertToDateFormat().convertToStringFormat()
+        releaseDateLabel.text = movie.releaseDate.convertToDateFormat().convertToStringFormat()
         
-        guard let vote = movie.voteAverage else { return }
+        let vote = movie.voteAverage
         progressView.shapeLayer.strokeEnd = CGFloat(vote / 10.0)
         ratingLabel.text = "\(Int(vote * 10.0))"
         
@@ -79,7 +79,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         guard let url = URL(string: "https://image.tmdb.org/t/p/original/" + path) else {
             return
         }
-        imageView.loadImage(at: url)
+        imageView.loadImage(at: url, cropped: true)
     }
 
     @IBAction func schedule(_ sender: UIButton) {

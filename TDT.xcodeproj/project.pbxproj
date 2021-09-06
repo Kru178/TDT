@@ -29,6 +29,7 @@
 		7885FCD7261846B300247432 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD6261846B300247432 /* String+Ext.swift */; };
 		7885FCDA2618492F00247432 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885FCD92618492F00247432 /* Date+Ext.swift */; };
 		788E39A7262CA6D300E6EA35 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E39A6262CA6D300E6EA35 /* TestData.swift */; };
+		78D163BB26E67D490026DFCB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D163BA26E67D490026DFCB /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		7885FCD6261846B300247432 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		7885FCD92618492F00247432 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		788E39A6262CA6D300E6EA35 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		78D163BA26E67D490026DFCB /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			children = (
 				7885FCC42613835E00247432 /* MovieCollectionViewController.swift */,
 				7873545E2619E41600419148 /* DateViewController.swift */,
+				78D163BA26E67D490026DFCB /* DetailViewController.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7885FCDA2618492F00247432 /* Date+Ext.swift in Sources */,
+				78D163BB26E67D490026DFCB /* DetailViewController.swift in Sources */,
 				7885FCD126139F7A00247432 /* NetworkController.swift in Sources */,
 				787C31B7262C1F930085D4B8 /* UIViewController+Ext.swift in Sources */,
 				7885FCCD261384FB00247432 /* MovieCollectionViewCell.swift in Sources */,

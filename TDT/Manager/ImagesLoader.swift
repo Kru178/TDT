@@ -13,7 +13,7 @@ class ImagesLoader {
     private var loadedImages = [URL: UIImage]()
     private var runningRequests = [UUID: URLSessionDataTask]()
     
-    func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
+    func loadImage(_ url: URL, resize: Bool, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
         if let image = loadedImages[url] {
             completion(.success(image))
             return nil
@@ -26,9 +26,16 @@ class ImagesLoader {
                 self.runningRequests.removeValue(forKey: uuid)
             }
             if let data = data, let image = UIImage(data: data) {
-                let resizedImage = self.resizedImageWith(image: image)
-                self.loadedImages[url] = resizedImage
-                completion(.success(resizedImage))
+                var imageToShow = UIImage()
+                if resize {
+                    let resizedImage = self.resizedImageWith(image: image)
+                    self.loadedImages[url] = resizedImage
+                    imageToShow = resizedImage
+                } else {
+                    self.loadedImages[url] = image
+                    imageToShow = image
+                }
+                completion(.success(imageToShow))
                 return
             }
             guard let error = error else {

@@ -9,8 +9,8 @@ import UIKit
 
 extension UIImageView {
     
-  func loadImage(at url: URL) {
-    UIImageLoader.loader.load(url, for: self)
+    func loadImage(at url: URL, cropped: Bool) {
+    UIImageLoader.loader.load(url, resize: cropped, for: self)
   }
 
   func cancelImageLoad() {
