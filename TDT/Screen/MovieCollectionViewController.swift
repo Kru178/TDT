@@ -19,6 +19,7 @@ class MovieCollectionViewController: UICollectionViewController {
     var list: [Movie] = []
     var selectedMovie : Movie?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.alwaysBounceVertical = true
@@ -103,7 +104,6 @@ extension MovieCollectionViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        // TODO: 150 - magic constant
         return CGSize(width: widthPerItem, height: widthPerItem - 150)
     }
     
